@@ -15,6 +15,10 @@
 		57B789D120FDC6E900C81625 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789D020FDC6E900C81625 /* main.m */; };
 		57B789DB20FDC6E900C81625 /* lemonacsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789DA20FDC6E900C81625 /* lemonacsTests.m */; };
 		57B789E620FDC6E900C81625 /* lemonacsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789E520FDC6E900C81625 /* lemonacsUITests.m */; };
+		57B789F820FDC95300C81625 /* QRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789F420FDC95300C81625 /* QRCodeScanView.m */; };
+		57B789F920FDC95300C81625 /* QRCodeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789F520FDC95300C81625 /* QRCodeBackgroundView.m */; };
+		57B789FC20FDC9E100C81625 /* ScanQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789FB20FDC9E100C81625 /* ScanQRCodeViewController.m */; };
+		57B78A0020FDCAA100C81625 /* DrawingSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B789FE20FDCAA100C81625 /* DrawingSingle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,14 @@
 		57B789E120FDC6E900C81625 /* lemonacsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lemonacsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B789E520FDC6E900C81625 /* lemonacsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lemonacsUITests.m; sourceTree = "<group>"; };
 		57B789E720FDC6E900C81625 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57B789F420FDC95300C81625 /* QRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanView.m; sourceTree = "<group>"; };
+		57B789F520FDC95300C81625 /* QRCodeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeBackgroundView.m; sourceTree = "<group>"; };
+		57B789F620FDC95300C81625 /* QRCodeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeBackgroundView.h; sourceTree = "<group>"; };
+		57B789F720FDC95300C81625 /* QRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanView.h; sourceTree = "<group>"; };
+		57B789FA20FDC9E100C81625 /* ScanQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanQRCodeViewController.h; sourceTree = "<group>"; };
+		57B789FB20FDC9E100C81625 /* ScanQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanQRCodeViewController.m; sourceTree = "<group>"; };
+		57B789FE20FDCAA100C81625 /* DrawingSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingSingle.m; sourceTree = "<group>"; };
+		57B789FF20FDCAA100C81625 /* DrawingSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingSingle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +113,13 @@
 		57B789C020FDC6E700C81625 /* lemonacs */ = {
 			isa = PBXGroup;
 			children = (
+				57B789FD20FDCAA100C81625 /* single */,
+				57B789F320FDC8B100C81625 /* view */,
 				57B789C120FDC6E700C81625 /* AppDelegate.h */,
 				57B789C220FDC6E700C81625 /* AppDelegate.m */,
 				57B789C420FDC6E700C81625 /* ViewController.h */,
+				57B789FA20FDC9E100C81625 /* ScanQRCodeViewController.h */,
+				57B789FB20FDC9E100C81625 /* ScanQRCodeViewController.m */,
 				57B789C520FDC6E700C81625 /* ViewController.m */,
 				57B789C720FDC6E700C81625 /* Main.storyboard */,
 				57B789CA20FDC6E900C81625 /* Assets.xcassets */,
@@ -130,6 +146,26 @@
 				57B789E720FDC6E900C81625 /* Info.plist */,
 			);
 			path = lemonacsUITests;
+			sourceTree = "<group>";
+		};
+		57B789F320FDC8B100C81625 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				57B789F620FDC95300C81625 /* QRCodeBackgroundView.h */,
+				57B789F520FDC95300C81625 /* QRCodeBackgroundView.m */,
+				57B789F720FDC95300C81625 /* QRCodeScanView.h */,
+				57B789F420FDC95300C81625 /* QRCodeScanView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		57B789FD20FDCAA100C81625 /* single */ = {
+			isa = PBXGroup;
+			children = (
+				57B789FF20FDCAA100C81625 /* DrawingSingle.h */,
+				57B789FE20FDCAA100C81625 /* DrawingSingle.m */,
+			);
+			path = single;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,8 +299,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				57B789C620FDC6E700C81625 /* ViewController.m in Sources */,
+				57B789F820FDC95300C81625 /* QRCodeScanView.m in Sources */,
 				57B789D120FDC6E900C81625 /* main.m in Sources */,
 				57B789C320FDC6E700C81625 /* AppDelegate.m in Sources */,
+				57B789F920FDC95300C81625 /* QRCodeBackgroundView.m in Sources */,
+				57B78A0020FDCAA100C81625 /* DrawingSingle.m in Sources */,
+				57B789FC20FDC9E100C81625 /* ScanQRCodeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
