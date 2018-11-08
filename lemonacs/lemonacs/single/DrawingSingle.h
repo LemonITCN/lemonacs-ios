@@ -12,5 +12,6 @@
 
 +(DrawingSingle *)shareDrawingSingle;
 - (UIImage *)getFoucusImageSize:(CGSize)size themeColor:(UIColor *)color;
-- (UIImage *)getLineColor:(CGSize)size color:(UIColor *)color;
+- (UIImage *)getLineSize:(CGSize)size color:(UIColor *)color;
+- (UIImage *)getFlashLampSize:(CGSize)size color:(UIColor *)color;
 @end

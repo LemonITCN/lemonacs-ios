@@ -5,10 +5,11 @@
 //  Created by 王炜光 on 2018/7/17.
 //  Copyright © 2018年 Ezrea1. All rights reserved.
 //
+#define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 /* 屏幕宽 */
-#define LWSCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 /* 屏幕高 */
-#define LWSCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
 #import <AVFoundation/AVFoundation.h>
 #import "ViewController.h"
 #import "QRCodeScanView.h"
@@ -71,7 +72,7 @@ static CGFloat ScanWidth;
     [self.output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     
     //设置扫描区域的大小 rectOfInterest  默认值是CGRectMake(0, 0, 1, 1) 按比例设置
-    self.output.rectOfInterest = CGRectMake(_scanY/LWSCREENH_HEIGHT,((LWSCREEN_WIDTH-ScanWidth)/2)/LWSCREEN_WIDTH,ScanHeight/LWSCREENH_HEIGHT,ScanWidth/LWSCREEN_WIDTH);
+    self.output.rectOfInterest = CGRectMake(_scanY/SCREENH_HEIGHT,((SCREEN_WIDTH-ScanWidth)/2)/SCREEN_WIDTH,ScanHeight/SCREENH_HEIGHT,ScanWidth/SCREEN_WIDTH);
 
     
     // 初始化session
@@ -123,7 +124,7 @@ static CGFloat ScanWidth;
     // 因为考虑到全屏显示以及设备自适应,这里我们采用fill填充
     self.preview.videoGravity =AVLayerVideoGravityResizeAspectFill;
     // 设置展示平台的frame
-    self.preview.frame = CGRectMake(0, 0, LWSCREEN_WIDTH, LWSCREENH_HEIGHT);
+    self.preview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT);
     // 因为 AVCaptureVideoPreviewLayer是继承CALayer,所以添加到当前view的layer层
     [self.view.layer insertSublayer:self.preview atIndex:0];
     
@@ -161,7 +162,7 @@ static CGFloat ScanWidth;
 
 - (void)createUI{
     //扫描区域
-    CGRect scanFrame = CGRectMake((LWSCREEN_WIDTH-ScanWidth)/2, _scanY, ScanWidth, ScanHeight);
+    CGRect scanFrame = CGRectMake((SCREEN_WIDTH-ScanWidth)/2, _scanY, ScanWidth, ScanHeight);
     
     // 创建view,用来辅助展示扫描的区域
     self.scanView = [[QRCodeScanView alloc] initWithFrame:scanFrame];
@@ -178,7 +179,7 @@ static CGFloat ScanWidth;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor colorWithRed:224/255.0 green:224/255.0 blue:224/255.0 alpha:1.0];
-    label.frame = CGRectMake(0, CGRectGetMaxY(self.scanView.frame)+10, LWSCREEN_WIDTH, 20);
+    label.frame = CGRectMake(0, CGRectGetMaxY(self.scanView.frame)+10, SCREEN_WIDTH, 20);
     [self.view addSubview:label];
     
     
@@ -189,11 +190,38 @@ static CGFloat ScanWidth;
         [btn setTitle:arr[i] forState:UIControlStateNormal];
         btn.tag = i;
         btn.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
-        btn.frame = CGRectMake(LWSCREEN_WIDTH/2*i, LWSCREENH_HEIGHT-50, LWSCREEN_WIDTH/2, 50);
+        btn.frame = CGRectMake(SCREEN_WIDTH/2*i, SCREENH_HEIGHT-50, SCREEN_WIDTH/2, 50);
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
     }
+    
+    
+    UIView *titleBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX?84:64)];
+    titleBGView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:titleBGView];
+    
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(16, 0, 44, 64);
+    backBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+    backBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [backBtn addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-120, 64)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.center = titleBGView.center;
+    titleLabel.text = self.title;
+    titleLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:titleLabel];
+    
 }
+
+- (void)goBack:(UIButton *)btn{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 #pragma mark - 菜单按钮点击事件
 - (void)btnClick:(UIButton *)sender

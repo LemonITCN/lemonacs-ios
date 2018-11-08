@@ -38,7 +38,7 @@
     //横线
     self.lineImage = [[UIImageView alloc] init];
     self.lineImage.frame = CGRectMake(0, 0, self.frame.size.width, 4);
-    self.lineImage.image = [[DrawingSingle shareDrawingSingle] getLineColor:self.lineImage.frame.size color:[UIColor greenColor]];
+    self.lineImage.image = [[DrawingSingle shareDrawingSingle] getLineSize:self.lineImage.frame.size color:[UIColor greenColor]];
     [self addSubview:self.lineImage];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(lineAnimation) userInfo:nil repeats:YES];

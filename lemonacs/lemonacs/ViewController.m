@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ScanQRCodeViewController.h"
+#import "DrawingSingle.h"
 @interface ViewController ()
 
 @end
@@ -23,12 +24,20 @@
     scanQRCodeBtn.frame = CGRectMake(100, 100, 100, 100);
     [scanQRCodeBtn addTarget:self action:@selector(scanQRCode:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scanQRCodeBtn];
+    
+    
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 200, 21, 42)];
+    [self.view addSubview:tempImageView];
+    tempImageView.image = [[DrawingSingle shareDrawingSingle] getFlashLampSize:tempImageView.frame.size color:[UIColor redColor]];
+    
 }
 
 - (void)scanQRCode:(UIButton *)btn{
     ScanQRCodeViewController *scanQRCodeVC = [[ScanQRCodeViewController alloc] init];
     scanQRCodeVC.scanY = 150;
     scanQRCodeVC.scanSize = CGSizeMake(250, 250);
+    scanQRCodeVC.title = @"lemonacs";
     [self presentViewController:scanQRCodeVC animated:YES completion:nil];
 }
 

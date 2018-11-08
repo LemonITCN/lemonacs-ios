@@ -6,8 +6,8 @@
 //  Copyright © 2018年 Ezrea1. All rights reserved.
 //
 
+#define Degrees_To_Radians(angle) ((angle) / 180.0 * M_PI)
 #import "DrawingSingle.h"
-
 @implementation DrawingSingle
 +(DrawingSingle *)shareDrawingSingle{
     static DrawingSingle *single = nil;
@@ -65,7 +65,7 @@
 }
 
 
-- (UIImage *)getLineColor:(CGSize)size color:(UIColor *)color{
+- (UIImage *)getLineSize:(CGSize)size color:(UIColor *)color{
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -104,6 +104,50 @@
                                 kCGGradientDrawsAfterEndLocation);
     CGContextRestoreGState(context);// 恢复到之前的context
 
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭图形上下文
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (UIImage *)getFlashLampSize:(CGSize)size color:(UIColor *)color{
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetLineWidth(context, 2.0);//线的宽度
+    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    CGContextStrokeRect(context,CGRectMake(2, 2, size.width-4, size.height/7));
+    
+    CGContextAddArc(context, size.width/2, 2+size.height/7, size.width/2-2, 0,M_PI, 0); //添加一个圆
+    CGContextDrawPath(context, kCGPathStroke); //绘制路径
+
+    CGContextStrokeRect(context,CGRectMake(size.width/4+2, size.height-size.height/6, size.width/2-4, size.height/6-2));
+    
+    CGPoint aPoints[2];//坐标点
+    
+    aPoints[0] =CGPointMake(size.width/4+2, size.height/7+(size.width/2-2)*cos(Degrees_To_Radians(30))+2);//坐标1
+    aPoints[1] =CGPointMake(size.width/4+2, size.height-size.height/6);//坐标2
+    //CGContextAddLines(CGContextRef c, const CGPoint points[],size_t count)
+    //points[]坐标数组，和count大小
+    CGContextAddLines(context, aPoints, 2);//添加线
+    CGContextDrawPath(context, kCGPathStroke); //根据坐标绘制路径
+    
+    aPoints[0] =CGPointMake(size.width/4*3-2, size.height/7+(size.width/2-2)*cos(Degrees_To_Radians(30))+2);//坐标1
+    aPoints[1] =CGPointMake(size.width/4*3-2, size.height-size.height/6);//坐标2
+    //CGContextAddLines(CGContextRef c, const CGPoint points[],size_t count)
+    //points[]坐标数组，和count大小
+    CGContextAddLines(context, aPoints, 2);//添加线
+    CGContextDrawPath(context, kCGPathStroke); //根据坐标绘制路径
+    
+    
+    aPoints[0] =CGPointMake(size.width/2.0, size.height/2+2);//坐标1
+    aPoints[1] =CGPointMake(size.width/2.0, size.height/2+2 +size.height/7-2);//坐标2
+    //CGContextAddLines(CGContextRef c, const CGPoint points[],size_t count)
+    //points[]坐标数组，和count大小
+    CGContextAddLines(context, aPoints, 2);//添加线
+    CGContextDrawPath(context, kCGPathStroke); //根据坐标绘制路径
+    
+    
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     //关闭图形上下文
     UIGraphicsEndImageContext();
